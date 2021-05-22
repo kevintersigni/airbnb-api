@@ -6,7 +6,7 @@ const helmet = require("helmet");
 
 const app = express();
 // initialisation du serveur
-//
+
 app.use(helmet());
 // activation des protections
 
@@ -23,11 +23,13 @@ mongoose.connect("mongodb://localhost/airbnb-api", {
   useFindAndModify: false,
 });
 // connexion à la base de données locale "airbnb-api"
+const userRoutes = require("./routes/user");
+const roomRoutes = require("./routes/room");
 
-const useRoutes = require("./routes/user");
 // import des routes
 
-app.use(useRoutes);
+app.use(userRoutes);
+app.use(roomRoutes);
 // activation de l'utilisation des routes
 
 app.all("*", (req, res) => {
